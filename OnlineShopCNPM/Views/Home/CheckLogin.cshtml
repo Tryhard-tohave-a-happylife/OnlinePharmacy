@@ -1,0 +1,49 @@
+﻿@model OnlineShop.Models.LoginModel
+
+<div id="loginModel">
+    <img src="/Assets/client/img/common/icon-cancel.png" 
+         style="width: 20px; height: 20px; position: absolute; right: 12px;" id="login-cancel"/>
+@using (Html.BeginForm("Login", "User", FormMethod.Post)) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <div class="title-loginmodel">ĐĂNG NHẬP</div>
+        <div class="login-group">
+            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "inf-loginmodel" })
+            @Html.TextBoxFor(model => model.UserName, new { @class = "input-login" })
+            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="login-group">
+            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "inf-loginmodel" })
+            @Html.PasswordFor(model => model.Password, new { @class = "input-login" })
+            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="login-group" style="margin-top: 10px;">
+             <input type="submit" value="ĐĂNG NHẬP" class="btn-login" />
+        </div>
+        <br />
+        <a href="/quen-mat-khau" style="float: left; margin-right: 20px;" class="link-login">Quên mật khẩu?</a>
+        <a href="/dang-ky" style="float: left;"  class="link-login">Tạo tài khoản mới</a>
+    </div>
+}
+</div>
+<script>
+    var isAppear = false;
+    $(document).ready(function () {
+        $("#icon-user i").off("click").on("click", function () {
+            if (!isAppear) {
+                isAppear = true;
+                $("body").css("overflow-y", "hidden");
+                $("#loginModel").fadeIn(400);
+            }
+        })
+        $("#login-cancel").off("click").on("click", function () {
+            $("body").css("overflow-y", "scroll");
+            $("#loginModel").fadeOut(400);
+            isAppear = false;
+        })
+    })
+</script>

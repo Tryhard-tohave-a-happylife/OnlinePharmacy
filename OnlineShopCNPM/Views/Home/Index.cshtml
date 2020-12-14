@@ -1,0 +1,128 @@
+﻿
+@{
+    ViewBag.Title = "Index ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="header-second-main">
+    <div id="text_header_second">
+        <p id="cho_y_te_xanh"> Life Is Good</p>
+        <p id="cho_y_te_online" style="font-style: italic;">LIFE IS GOOD</p>
+        <p id="text_introction"> Kinh doanh các sản phẩm y tế: Thuốc, Thực phẩm chức năng, Thiết bị & Vật tư y tế</p>
+        <div id="mua_ngay">
+            <a href="https://choytexanh.com/shop/" target="_self" style=" background-color:#2EBB2E;text-decoration:none">
+                <p>MUA NGAY</p>
+            </a>
+        </div>
+    </div>
+</div>
+<div id="row-adv">
+    <div id="space-left"></div>
+    <div id="adv-first">
+        <img src="/Assets/client/img/common/icon-diversityProduct.png" class="img-adv"><br><br>
+        <div class="adv-inf-first">Sản phẩm đa dạng</div><br>
+        <div class="adv-inf-second">Đầy đủ các sản phẩm Y tế</div>
+    </div>
+    <div id="adv-second">
+        <img src="/Assets/client/img/common/icon-star.png" class="img-adv"><br><br>
+        <div class="adv-inf-first">Chất lượng đảm bảo</div><br>
+        <div class="adv-inf-second">Sản phẩm từ các nguồn uy tín</div>
+    </div>
+    <div id="adv-fourth">
+        <img src="/Assets/client/img/common/icon-setting.png" class="img-adv"><br><br>
+        <div class="adv-inf-first">Chăm sóc tận tậm</div><br>
+        <div class="adv-inf-second">Tư vấn và CSKH tận tình</div>
+    </div>
+    <div id="adv-third">
+        <img src="/Assets/client/img/common/icon-tive.png" class="img-adv"><br><br>
+        <div class="adv-inf-first">Giá cả cạnh tranh</div><br>
+        <div class="adv-inf-second">Cam kết giá tốt nhất</div>
+    </div>
+</div>
+<br />
+<div class="fog-background">
+    <div class="dialog">
+        <div class="dialog-left">
+            <img src="" />
+        </div>
+        <div class="dialog-right">
+            <a href="" id="product-name" product-code =""></a>
+            <div id="hr"></div>
+            <div id="price-product">
+                <div id="price-promotion"></div>
+                <div id="price-present"></div>
+            </div>
+            <div id="product-info">
+                <div id="product-description"></div>
+                <div id="buy-product">
+                    <input type="button" value="-" id="remove-product" class="alter-amount" />
+                    <input type="number" max="99" min="1" aria-label="quantity" value="1" id="amount-product" />
+                    <input type="button" value="+" id="add-product" class="alter-amount" />
+                    <div id="cart-buy">MUA HÀNG</div>
+                </div>
+                <div id="category-product">
+                    Danh mục : <span></span>
+                </div>
+            </div>
+        </div>
+        <button class="button-close" type="button"><i id="window-close" class="fas fa-window-close"></i></button>
+    </div>
+</div>
+<div class="content" id="content-buy">
+    <div class="title-top">
+        <div class="hr-first"></div>
+        <div class="main-title-top">Sản phẩm bán chạy nhất</div>
+        <div class="hr-first"></div>
+    </div>
+    <div class="button-pre" id="pre-buy-button">
+        <i class="fas fa-chevron-left" style="font-size: 20pt; transition: color .3s;"></i>
+    </div>
+    <div class="button-next" id="next-buy-button">
+        <i class="fas fa-chevron-right" style="font-size: 20pt;transition: color .3s;"></i>
+    </div>
+    <div class="overflow-product">
+        <div id="slide-buy" class="slide-product" time-slide="0">
+            @{ Html.RenderAction("TopBuyProduct", "Product");}
+        </div>
+    </div>
+</div>
+<div class="content" id="content-view">
+    <div class="title-top">
+        <div class="hr-first"></div>
+        <div class="main-title-top">Sản phẩm theo dõi nhiều</div>
+        <div class="hr-first"></div>
+    </div>
+    <div class="button-pre" id="pre-view-button">
+        <i class="fas fa-chevron-left" style="font-size: 20pt; transition: color .3s;"></i>
+    </div>
+    <div class="button-next" id="next-view-button">
+        <i class="fas fa-chevron-right" style="font-size: 20pt;transition: color .3s;"></i>
+    </div>
+    <div class="overflow-product">
+        <div id="slide-view" class="slide-product" time-slide="0">
+            @{ Html.RenderAction("TopViewProduct", "Product");}
+        </div>
+    </div>
+</div>
+<div class="content" id="content-promotion">
+    <div class="title-top">
+        <div class="hr-first"></div>
+        <div class="main-title-top">Sản phẩm giảm giá</div>
+        <div class="hr-first"></div>
+    </div>
+    <div class="button-pre" id="pre-promotion-button">
+        <i class="fas fa-chevron-left" style="font-size: 20pt; transition: color .3s;"></i>
+    </div>
+    <div class="button-next" id="next-promotion-button">
+        <i class="fas fa-chevron-right" style="font-size: 20pt;transition: color .3s;"></i>
+    </div>
+    <div class="overflow-product">
+        <div id="slide-promotion" class="slide-product" time-slide="0">
+            @{ Html.RenderAction("TopPromotionProduct", "Product");}
+        </div>
+    </div>
+</div>
+<div class="contains-reviews">
+    @{ Html.RenderAction("ListReview", "Review");}
+    <div id="slide-review-pre" class="button-slide-review"><i class="fas fa-angle-left"></i></div>
+    <div id="slide-review-next" class="button-slide-review"><i class="fas fa-angle-right"></i></div>
+</div>

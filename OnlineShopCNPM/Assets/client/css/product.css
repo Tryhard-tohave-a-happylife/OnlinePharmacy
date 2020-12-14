@@ -1,0 +1,214 @@
+
+#row{
+    display: block;
+}
+#product-right{
+    width: 70%;
+    height: 100%;
+    flex-basis: 75%;
+    position: relative;
+    margin: 0;
+    right: 20px;
+    padding: 0 15px 30px;
+}
+#number ul{
+    background-color: red;
+    padding:0px;  
+    list-style: none;
+}
+
+#number{
+    float: left;
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+}
+#number ul li {
+    text-decoration: none;
+    line-height: 14px;
+    float: left;
+    margin-right: 10px;
+}
+#number ul li .current{
+    border-color: #39b54a;
+    color: #fff;
+    background-color: #39b54a;
+    font-size: 1.1em;
+    display: block;
+    height: 2.25em;
+    line-height: 2em;
+    text-align: center;
+    width: auto;
+    min-width: 2.25em;
+    padding: 0 7px;
+    font-weight: bolder;
+    border-radius: 99px;
+    border: 2px solid #39b54a;
+    transition: all .3s;
+}
+#number ul li a, .dots{
+    color: gray;
+    text-decoration: none;
+    font-size: 1.1em;
+    display: block;
+    height: 2.25em;
+    line-height: 2em;
+    text-align: center;
+    width: auto;
+    min-width: 2.25em;
+    padding: 0 7px;
+    font-weight: bolder;
+    border-radius: 99px;
+    border: 2px solid gray;
+    transition: all .3s;
+    background-color: transparent;
+} 
+#number ul li a:hover{
+    border-color: #39b54a;
+    color: #fff;
+    background-color: #39b54a;
+}
+.category-box{
+    margin-top: .1em;
+    margin-bottom: .1em;
+    opacity: .7;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 8pt;
+}
+.title-box  a{
+    line-height: 1.3;
+    margin-top: .1em;
+    margin-bottom: .1em;
+    color: #4e657b;
+    text-decoration: none;
+    font-size: 9pt;
+    line-height: 1.2;
+    text-transform: uppercase;
+    overflow: scroll;
+}
+.products{
+    float: left;
+    width: 23%;
+    margin-right: 2%;
+    margin-bottom: 30px;
+}
+.box-image a img{
+    width: 100%;
+    height: auto;
+    margin-bottom: 5px;
+}
+#slide {
+    background-color: #448741;
+    height: 110px;
+    width: 100%;
+    color: white;
+    box-shadow: inset 0 0 30px 0px rgba(0,0,0,.2);
+}
+.left {
+    float: left;
+    margin-top: 18px;
+    margin-left: calc(30% - 240px);
+}
+#slide #title-category{
+    font-size: 18pt;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+#slide a{
+    color: white;
+    text-decoration-line: none;
+}
+#slide nav{
+    font-size: 13pt;
+}
+#slide .divider{
+    padding-left: 5px;
+    padding-right: 5px;
+    color: rgba(255,255,255,0.6);
+}
+.right{
+    float: right;
+    margin-right: calc(30% - 240px);
+    margin-top: 37px;
+}
+#slide #choose-order {
+    width: 275px;
+    height: 36px;
+    background: url('../img/common/arrow-down-line.png') no-repeat calc(100% - 14px) center;
+    background-color: rgba(255,255,255,0.25);
+    border: 1px solid rgba(255,255,255,0.05);
+    -webkit-appearance: none;
+    border-radius: 30px;
+    padding-left: 8px;
+    color: rgba(255,255,255,0.9);
+    font-size: 13pt;
+    outline: none;
+}
+#slide #choose-order option{
+    color: black;
+}
+.contains-pagelist{
+    width: 100%;
+    float: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.contains-button-page{
+    width: auto;
+    margin: 0 auto;
+}
+.contains-button-page a:hover {
+    text-decoration-line: none;
+    color: white;
+    background-color: forestgreen;
+}
+.choice {
+    width: 30px;
+    height: 30px;
+    border: 2px solid rgba(0,0,0,0.5);
+    border-radius: 15px;
+    text-align: center;
+    font-size: 12pt;
+    line-height: 1.6;
+    color: white;
+    background-color: #4bd650;
+    margin-right: 5px;
+}
+.common {
+    width: 30px;
+    height: 30px;
+    border: 2px solid rgba(0,0,0,0.5);
+    border-radius: 15px;
+    text-align: center;
+    font-size: 12pt;
+    line-height: 1.6;
+    color: rgba(0,0,0,0.5);
+    margin-right: 5px;
+}
+.button-next{
+    width: 24px;
+    height: 24px;
+    border: 2px solid rgba(0,0,0,0.5);
+    border-radius: 12px;
+    text-align: center;
+    line-height: 1.6;
+    color: rgba(0,0,0,0.5);
+    margin-right: 5px;
+    float: left;
+    margin-top: 3px;
+}
+.more_page {
+    width: 24px;
+    height: 24px;
+    border: 2px solid rgba(0,0,0,0.5);
+    border-radius: 12px;
+    text-align: center;
+    line-height: 1.6;
+    color: rgba(0,0,0,0.5);
+    margin-right: 5px;
+    float: left;
+    margin-top: 3px;
+}

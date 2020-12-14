@@ -1,0 +1,29 @@
+﻿@model List<Model.EF.ProductCategory>
+@foreach (var item in Model)
+{
+    if (item.DisplayOrder == 1)
+    {
+        if (!item.HaveChild.Value)
+        {
+            <li class="product-type"><a class="product-type-item" href="/san-pham/@item.ID/@item.MetaTitle/1">@item.Name</a></li>
+        }
+        else
+        {
+            <li class="product-type">
+                <a class="product-type-item" href="/san-pham/@item.ID/@item.MetaTitle/1">@item.Name</a>
+                <div class="select-item"><i class="fas fa-angle-down"></i></div>
+                <ul class="children-product-category" style="display: none;">
+                  @foreach(var itemMore in Model)
+                  {
+                      if(itemMore.ParentID == item.ID)
+                      {
+                           <li class="children-product-type">
+                               <a class="children-product-type-item" href="/san-pham/@itemMore.ID/@itemMore.MetaTitle/2">@itemMore.Name</a>
+                           </li>
+                      }
+                  }
+                </ul>
+            </li>
+        }
+    }
+}

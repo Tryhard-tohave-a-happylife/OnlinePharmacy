@@ -1,0 +1,12 @@
+﻿@model List<Model.EF.ProductCategory>
+<input type="text" id="search-bar-res" value="" placeholder="Tìm kiếm sản phẩm y tế...">
+<select id="resizing_select_res">
+    <option value="all">All</option>
+    @foreach (var item in Model)
+    {
+        <option value="@item.MetaDescriptions">@item.Name</option>
+    }
+</select>
+<select id="width_tmp_select_res" style="display: none;">
+    <option id="width_tmp_option_res"></option>
+</select>

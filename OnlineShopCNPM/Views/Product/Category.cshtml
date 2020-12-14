@@ -1,0 +1,185 @@
+﻿@model List<Model.ViewModel.ProductViewDisplay>
+@{
+    ViewBag.Title = "Category";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section cssInsert{
+    <link href="/Assets/client/css/product.css" rel="stylesheet" />
+    <link href="/Assets/client/css/scrollBarCategory.css" rel="stylesheet" />
+}
+@{
+    var ord = 1;
+    var catePar = ViewBag.CategoryParent;
+    var cate = ViewBag.Category;
+}
+<div id="slide">
+
+    @if (ViewBag.Order != 3)
+    {
+        <div class="left">
+            <div id="title-category">@cate.Name</div>
+            <nav>
+                <a href="/" class="slide-linked">TRANG CHỦ</a>
+                <span class="divider">/</span>
+                @if (ViewBag.CategoryParent != null)
+                {
+                    ord = 2;
+                    <a href="/san-pham/@catePar.ID/@catePar.MetaTitle/1" class="slide-linked">@catePar.Name.ToUpper()</a>
+                    <span class="divider">/</span>
+                }
+                <a href="/san-pham/@cate.ID/@cate.MetaTitle/@ord" class="slide-linked">@cate.Name.ToUpper()</a>
+                @if (ViewBag.PageIndex != 1)
+                {
+                    <span class="divider">/</span>
+                    <span style="font-weight: bold;">TRANG @ViewBag.PageIndex</span>
+                }
+            </nav>
+        </div>
+    }
+    else
+    {
+        <div class="left">
+            <div id="title-category">Kết quả tìm kiếm : "@ViewBag.Search"</div>
+            <nav>
+                <a href="/" class="slide-linked">TRANG CHỦ</a>
+                <span class="divider">/</span>
+                @if (cate != null)
+                {
+                    <a href="/san-pham/@cate.ID/@cate.MetaTitle/1" class="slide-linked">@cate.Name.ToUpper()</a>
+                    <span class="divider">/</span>
+                    <a href="/san-pham/@cate.ID/@cate.MetaTitle/1?search=@ViewBag.Search" class="slide-linked">Kết quả tìm kiếm : "@ViewBag.Search"</a>
+                }
+                else
+                {
+                    <a href="/san-pham/default/default/1" class="slide-linked">Shop</a>
+                    <span class="divider">/</span>
+                    <a href="/san-pham/default/default/1?search=@ViewBag.Search" class="slide-linked">Kết quả tìm kiếm : "@ViewBag.Search"</a>
+                }
+                @if (ViewBag.PageIndex != 1)
+                {
+                    <span class="divider">/</span>
+                    <span style="font-weight: bold;">TRANG @ViewBag.PageIndex</span>
+                }
+            </nav>
+        </div>
+    }
+    @{ var ArrayOrderBy = ViewBag.ArrayOrderBy;
+        var link = "";
+        if (ViewBag.Order != 3)
+        {
+            link = "/san-pham/" + cate.ID + "/" + cate.MetaTitle + "/" + ord + "?";
+        }
+        else
+        {
+            if (cate != null)
+            {
+                link = "/san-pham/" + cate.ID + "/" + cate.MetaTitle + "/3?search=" + ViewBag.Search + "&";
+            }
+            else
+            {
+                link = "/san-pham/default/default/3?search=" + ViewBag.Search + "&";
+            }
+        }
+    }
+    <div class="right">
+        <select id="choose-order" onchange="location = this.value;">
+            @for (int i = 0; i < ArrayOrderBy.Length; i++)
+            {
+                if (ViewBag.OrderBy == ArrayOrderBy[i][0])
+                {
+                    var url = link + "orderBy=" + @ArrayOrderBy[i][0];
+                    <option value="@url" selected>@ArrayOrderBy[i][1]</option>
+                }
+                else
+                {
+                    var url = link + "orderBy=" + @ArrayOrderBy[i][0];
+                    <option value="@url">@ArrayOrderBy[i][1]</option>
+                }
+            }
+        </select>
+    </div>
+</div>
+<div id="content">
+    <div class="first-content">
+        <div class="title-first-content">DANH MỤC SẢN PHẨM</div>
+        <div id="small-item-1"></div>
+        <ul class="product-category">
+            @{ Html.RenderAction("ListProductCategory", "ProductCategory"); }
+        </ul>
+    </div>
+    <div class="second-content">
+        @foreach (var item in Model)
+        {
+            <div class="products">
+                <div class="box-image">
+                    <a href="/chi-tiet/@item.ID/@item.MetaTitle/@ViewBag.Order?inCategory=true">
+                        <img src="@item.Image" alt="" />
+                    </a>
+                </div>
+                <div class="box-text">
+                    <div class="title-box">
+                        <p class="category-box">@item.CategoryTitle</p>
+                        <p class="nameproduct">
+                            <a href="/chi-tiet/@item.ID/@item.MetaTitle/@ViewBag.Order?inCategory=true">@item.Name</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+        @if (ViewBag.TotalPage > 1)
+        {
+            link += "orderBy=" + ViewBag.OrderBy;
+            <div class="contains-pagelist">
+            <div class="contains-button-page">
+                 <a href="@link&page=@ViewBag.PrePage" rel="next" class="button-next"><i class="fas fa-angle-left"></i></a>
+                @if (ViewBag.TotalPage <= 6)
+                {
+                    for (int i = 1; i <= ViewBag.TotalPage; i++)
+                    {
+                        var clss = "common";
+                        if (i == ViewBag.PageIndex)
+                        {
+                            clss = "choice";
+                        }
+                        <a href="@link&page=@i" class="@clss" style="float: left;">@i</a>
+                    }
+                }
+                else
+                {
+                    for (int i = 1; i <= 3; i++)
+                    {
+                        var clss = "common";
+                        if (i == ViewBag.PageIndex)
+                        {
+                            clss = "choice";
+                        }
+                        <a href="@link&page=@i" class="@clss" style="float: left;">@i</a>
+                    }
+                    <div class="more_page">...</div>
+                    if (ViewBag.PageIndex > 3 && ViewBag.PageIndex < ViewBag.LastPage - 2)
+                    {
+                        <a href="@link&page=@ViewBag.PageIndex" class="choice" style="float: left;">@ViewBag.PageIndex</a>
+                        <div class="more_page">...</div>
+                    }
+                    for (int i = ViewBag.LastPage - 2; i <= ViewBag.LastPage; i++)
+                    {
+                        var clss = "common";
+                        if (i == ViewBag.PageIndex)
+                        {
+                            clss = "choice";
+                        }
+                        <a href="@link&page=@i" class="@clss" style="float: left;">@i</a>
+                    }
+                }
+                <a href="@link&page=@ViewBag.NextPage" rel="next" class="button-next"><i class="fas fa-angle-right"></i></a>
+            </div>
+            </div>    
+        }
+    </div>
+</div>
+@section jsFooter{
+    <script src="/Assets/client/js/animation/ScrollProductCategory.js"></script>
+}
+
+
+

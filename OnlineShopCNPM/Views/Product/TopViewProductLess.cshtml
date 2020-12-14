@@ -1,0 +1,19 @@
+﻿@model List<Model.EF.Product>
+@for (int i = 0; i < Model.Count(); i++)
+{
+    <div class="each-product">
+        <a href="/chi-tiet/@Model[i].ProductCode/@Model[i].MetaTitle/1" style="text-decoration: none;">
+            <img src="@Model[i].ImageFirst" class="each-image-product" />
+        </a>
+        <a href="/chi-tiet/@Model[i].ProductCode/@Model[i].MetaTitle/1" style="text-decoration: none;">
+            <div class="each-name-product">@Model[i].Name</div>
+        </a>
+        <div class="each-price" style="color:black;">
+            @if (Model[i].PercentSale != 0)
+            {
+                <span class="each-priceOld-product">₫@Model[i].Price</span>
+            }
+            <span class="each-price-product">₫@((int)(Model[i].Price-(Model[i].Price * (decimal)(Model[i].PercentSale/100))))</span>
+        </div>
+    </div>
+}

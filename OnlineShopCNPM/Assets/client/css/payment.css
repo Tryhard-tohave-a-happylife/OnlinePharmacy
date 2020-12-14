@@ -1,0 +1,395 @@
+﻿#main {
+    background-color: #fff;
+    margin-bottom: 55%;
+}
+
+#page-title {
+    max-height: auto;
+}
+
+#page-title-inner {
+    max-height: auto;
+    padding-top: 25px;
+}
+
+#page-title-center {
+    font-family: "Roboto";
+    text-transform: uppercase;
+    margin: 20px 5% 20px 5%;
+    text-align: center;
+    line-height: 30px;
+}
+
+    #page-title-center a {
+        text-decoration: none;
+        color: #ccc;
+        font-size: 25px;
+    }
+
+    #page-title-center #shoppingcart:hover {
+        color: black;
+    }
+
+    #page-title-center #checkout {
+        color: #000000
+    }
+
+    #page-title-center #ordercomplete {
+        pointer-events: none;
+    }
+
+    #page-title-center span {
+        font-size: 25px;
+        padding-left: 5px;
+        padding-right: 5px;
+        color: #ccc;
+    }
+
+#cart-container {
+    padding-top: 30px;
+    width: 1080px;
+    margin-left: auto;
+    margin-right: auto;
+    max-height: auto;
+}
+
+    #cart-container #container-message {
+        font-size: 16px;
+        padding-bottom: 20px;
+    }
+
+        #cart-container #container-message a {
+            text-decoration: none;
+            color: #000;
+        }
+
+            #cart-container #container-message a:hover {
+                color: rgb(255, 0, 0);
+            }
+
+    #cart-container #checkout-coupon {
+        border: 2px dashed #39b54a;
+        padding: 10px 30px 30px;
+        margin-bottom: 30px;
+    }
+
+
+        #cart-container #checkout-coupon p {
+            font-size: 16px;
+        }
+
+        #cart-container #checkout-coupon #coupon {
+            width: 100%;
+        }
+
+            #cart-container #checkout-coupon #coupon #coupon-code {
+                width: 91%;
+                height: 35px;
+                padding: 0 .75em;
+                font-size: 14px;
+                vertical-align: middle;
+                box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+                border: 1px solid #ddd;
+                transition: color .3s,border .3s,background .3s,opacity .3s;
+            }
+
+            #cart-container #checkout-coupon #coupon #coupon-submit {
+                float: right;
+                width: 9%;
+                height: 35px;
+                background-color: #39b54a;
+                color: #fff;
+                border-color: rgba(0,0,0,.05);
+                text-transform: uppercase;
+                font-size: 15px;
+                letter-spacing: .03em;
+                cursor: pointer;
+                font-weight: bolder;
+                text-align: center;
+                vertical-align: middle;
+                text-shadow: none;
+                line-height: 15px;
+                transition: transform .3s,border .3s,background .3s,box-shadow .3s,opacity .3s,color .3s;
+                text-rendering: optimizeLegibility;
+            }
+
+#cart-container-left {
+    width: 608px;
+    float: left;
+    margin-right: 1%;
+    border-top: 1px solid #ccc;
+}
+
+#left-details p label {
+    color: #222;
+    font-weight: 700;
+    display: block;
+    font-size: .9em;
+    margin-bottom: .4em;
+}
+
+#left-details p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+
+#left-details .ten {
+    width: 51%;
+    float: left;
+    padding-right: 2%;
+}
+
+#left-details .ho {
+    width: 49%;
+    float: left;
+}
+
+#left-details .tencongty {
+    clear: left;
+}
+
+#left-details p input, textarea {
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    padding: 0 .75em;
+    height: 2.507em;
+    width: 100%;
+    font-size: .97em;
+    border-radius: 0;
+    max-width: 100%;
+    vertical-align: middle;
+    background-color: #fff;
+    color: #333;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+    transition: color .3s,border .3s,background .3s,opacity .3s;
+}
+
+#left-details p textarea {
+    min-height: 100px;
+    padding: 10px 0.75em;
+}
+
+#cart-container-right {
+    margin-left: 1%;
+    border: 2px solid #39b54a;
+    ;
+    float: left;
+    width: 450px;
+    height: auto;
+}
+
+@media screen and (max-width:1100px) {
+    #cart-container {
+        width: 98%;
+        margin-left: 1%;
+        margin-right: 1%;
+    }
+
+    #cart-container-left {
+        width: 60%;
+    }
+
+    #cart-container-right {
+        width: 38%;
+    }
+}
+
+@media screen and (max-width:750px) {
+    #cart-container {
+        width: 98%;
+        margin-left: 1%;
+        margin-right: 1%;
+    }
+
+    #cart-container-left {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    #cart-container-right {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    #cart-container #checkout-coupon {
+        height: 160px;
+    }
+
+        #cart-container #checkout-coupon #coupon #coupon-submit {
+            clear: left;
+            float: left;
+            width: 100%;
+        }
+
+        #cart-container #checkout-coupon #coupon #coupon-code {
+            width: 100%;
+        }
+
+    #cart-container #container-message {
+        text-align: center;
+    }
+}
+
+@media screen and (max-width:565px) {
+    #page-title-center #shoppingcart {
+        display: none;
+    }
+
+    #page-title-center span {
+        display: none;
+    }
+
+    #page-title-center #ordercomplete {
+        display: none;
+    }
+}
+
+#cart-container-right h2 {
+    margin-left: 15px;
+}
+
+#right-details {
+    padding: 10px 15px;
+    padding-top: 0px;
+    height: auto;
+}
+
+    #right-details #top-detail {
+        border-top: 3px solid #ececec;
+    }
+
+        #right-details #top-detail h3 {
+            text-transform: uppercase;
+            font-size: 14px;
+            float: left;
+        }
+
+        #right-details #top-detail #sp {
+            float: left;
+        }
+
+        #right-details #top-detail #tt {
+            float: right;
+        }
+
+    #right-details #second-row {
+        clear: left;
+        border-top: 1px solid #ececec;
+        padding-top: 10px;
+        margin-bottom: 30px;
+        height: auto;
+    }
+
+        #right-details #second-row #tensanpham {
+            float: left;
+        }
+
+        #right-details #second-row #tensanpham-gia {
+            float: right;
+        }
+
+    #right-details #third-row {
+        clear: left;
+        border-top: 1px solid #ececec;
+        padding-top: 10px;
+        margin-bottom: 30px;
+    }
+
+        #right-details #third-row #tamtinh {
+            float: left;
+            font-weight: bold;
+            color: #777;
+        }
+
+        #right-details #third-row #tamtinh-gia {
+            float: right;
+        }
+
+    #right-details #fourth-row {
+        clear: left;
+        border-top: 1px solid #ececec;
+        padding-top: 10px;
+        margin-bottom: 30px;
+    }
+
+        #right-details #fourth-row #giaohang {
+            float: left;
+            font-weight: bold;
+            color: #777;
+        }
+
+        #right-details #fourth-row #giaohang-gia {
+            float: right;
+        }
+
+    #right-details #fifth-row {
+        clear: left;
+        border-top: 1px solid #ececec;
+        padding-top: 10px;
+        margin-bottom: 30px;
+    }
+
+        #right-details #fifth-row #tong {
+            float: left;
+            font-weight: bold;
+            color: #777777;
+        }
+
+        #right-details #fifth-row #tong-gia {
+            float: right;
+        }
+
+    #right-details #sixth-row {
+        clear: left;
+        border-top: 2px solid #ececec;
+        margin-bottom: 30px;
+    }
+
+        #right-details #sixth-row form {
+            font-weight: bold;
+            line-height: 32px;
+        }
+
+            #right-details #sixth-row form input {
+                margin-right: 15px;
+                margin-top: 20px;
+            }
+
+            #right-details #sixth-row form #on-delivery {
+                border-top: 1px solid #ececec;
+                margin-top: 10px;
+            }
+
+            #right-details #sixth-row form p {
+                font-weight: normal;
+                margin: 0px;
+                color: #777777;
+            }
+
+    #right-details #button #dathang {
+        background-color: #39b54a;
+        color: #fff;
+        border-color: rgba(0,0,0,.05);
+        text-transform: uppercase;
+        font-size: 15px;
+        letter-spacing: .03em;
+        cursor: pointer;
+        font-weight: bolder;
+        text-align: center;
+        vertical-align: middle;
+        border-radius: 0;
+        margin-top: 0;
+        margin-bottom: 10px;
+        margin-right: 1em;
+        text-shadow: none;
+        line-height: 2.4em;
+        min-height: 45px;
+        padding: 0 1.2em;
+        max-width: 100%;
+        transition: transform .3s,border .3s,background .3s,box-shadow .3s,opacity .3s,color .3s;
+        text-rendering: optimizeLegibility;
+    }

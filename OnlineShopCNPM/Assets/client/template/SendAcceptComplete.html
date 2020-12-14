@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body style="font-family: Arial;">
+    <h2>Xin chào , đây là đơn hàng với mã : {{OrderID}} đang được bạn vận chuyển </h2>
+    <div> Thông tin của đơn hàng đã được gửi ở Email xác nhận</div>
+    <div>
+        Nếu như đơn hàng đã được giao đến khách hàng và thanh toán cũng như kí xác nhận đầy đủ, xin vui lòng xác nhận
+        nút dưới đây để hoàn thành đơn hàng {{OrderID}} : 
+    </div>
+    <a href="{{Link}}">
+        <div style="width: 120px; height: 60px; background-color: blue;
+                     text-align: center; color: white; font-size: 14pt; line-height: 3;
+                     text-decoration: none;">
+            Xác nhận
+        </div>
+    </a>
+    <br />
+    <div>Note <span style="color: red">*</span> : Vui lòng không phản hồi gmail này cũng như xác nhận nhiều lần</div>
+</body>
+</html>

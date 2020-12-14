@@ -1,0 +1,94 @@
+﻿@model List<Model.EF.Order>
+@{
+    ViewBag.Title = "DiaryOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var countComplete = 0;
+}
+@section cssInsert{
+    <link href="/Assets/client/css/DiaryOrder.css" rel="stylesheet" />
+}
+<div id="diary-order-title">NHẬT KÍ MUA HÀNG</div>
+<div id="order-complete">
+    <div class="order-title">Những đơn hàng đã hoàn thành</div>
+    <div class="order-main">
+        @foreach (var item in Model)
+        {
+            if (item.Status == "Complete")
+            {
+                countComplete += 1;
+                <div class="each-order">
+                    <a class="link" href="/chi-tiet-don-hang/@item.ID">
+                        <div class="order-display">
+                            <div style="float: left;">
+                                <div class="order-id">Mã Đơn Hàng : @item.ID.ToString().Substring(0, 8)</div>
+                                <div class="order-orderDate">Thời Gian Đặt Hàng : @item.OrderDate</div>
+                                @if (item.CostBy == 1)
+                                {
+                                    <div class="order-costBy">Thanh toán bằng tiền mặt khi nhận hàng</div>
+                                }
+                                else
+                                {
+                                    <div class="order-costBy">Thanh toán qua chuyển khoản ngân hàng</div>
+                                }
+                            </div>
+                            <div class="order-status-complete">@item.Status</div>
+                            @if (item.ChangeStatus.Value)
+                            {
+                                <div class="new-change-status">New</div>
+                            }
+                        </div>
+                    </a>
+                </div>
+            }
+        }
+        @if (countComplete == 0)
+        {
+            <div class="order-main-title">Chưa có đơn hàng nào được hoàn thành</div>
+        }
+    </div>
+    <div class="order-footer"></div>
+</div>
+<div id="order-other">
+    <div class="order-title">Những đơn hàng đang xử lý</div>
+    <div class="order-main">
+        @foreach (var item in Model)
+        {
+            if (item.Status != "Complete")
+            {
+                <div class="each-order">
+                    <a class="link" href="/chi-tiet-don-hang/@item.ID">
+                        <div class="order-display">
+                            <div style="float: left;">
+                                <div class="order-id">Mã Đơn Hàng : @item.ID.ToString().Substring(0, 8)</div>
+                                <div class="order-orderDate">Thời Gian Đặt Hàng : @item.OrderDate</div>
+                                @if (item.CostBy == 1)
+                                {
+                                    <div class="order-costBy">Thanh toán bằng tiền mặt khi nhận hàng</div>
+                                }
+                                else
+                                {
+                                    <div class="order-costBy">Thanh toán qua chuyển khoản ngân hàng</div>
+                                }
+                            </div>
+                            <div class="order-status-other">@item.Status</div>
+                            @if (item.ChangeStatus.Value)
+                            {
+                                <div class="new-change-status">New</div>
+                            }
+                        </div>
+                    </a>
+                </div>
+            }
+        }
+        @if (Model.Count() != 0 && countComplete == Model.Count())
+        {
+            <div class="order-main-title">Tất cả các đơn hàng đã được hoàn thành</div>
+        }
+        else if (Model.Count() == 0)
+        {
+            <div class="order-main-title">Chưa có đơn hàng nào được thực hiện</div>
+        }
+    </div>
+    <div class="order-footer"></div>
+</div>
+

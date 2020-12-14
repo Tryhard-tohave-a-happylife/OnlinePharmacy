@@ -1,0 +1,153 @@
+﻿@model List<OnlineShopCNPM.Models.CartItemModel>
+@section cssInsert{
+    <link href="/Assets/client/css/payment.css" rel="stylesheet" />
+ }
+@{ var sumOfMoney = new decimal();}
+<div id="page-title">
+    <div id="page-title-inner">
+        <nav id="page-title-center">
+            <a id="shoppingcart" href="/gio-hang">Shopping Cart</a>
+            <span class="divider">></span>
+            <a id="checkout" href="#">Checkout Details</a>
+            <span class="divider">></span>
+            <a id="ordercomplete" href="#">Order Complete</a>
+            <span class="divider">
+            </span>
+        </nav>
+    </div>
+</div>
+
+<div id="cart-container">
+    <div id="container-message">
+        Bạn có mã ưu đãi?
+        <span>Ấn vào đây để nhập mã</span>
+    </div>
+
+    <form id="checkout-coupon">
+        <p>Nếu bạn có mã giảm giá, vui lòng điền vào phía bên dưới.</p>
+        <div id="coupon">
+            <input id="coupon-code" type="text" name="coupon-code" placeholder="Mã ưu đãi!!!">
+            <button id="coupon-submit" name="apply-coupon" value="Áp dụng">Áp dụng</button>
+        </div>
+    </form>
+
+    <div id="cart-container-left">
+        <h1>Thông tin thanh toán</h1>
+        <div id="left-details">
+            <p class="ten">
+                <label>Tên *</label>
+                <span>
+                    <input type="text" value="@ViewBag.Name" autocomplete="given-name" id="ship-name-first" required>
+                </span>
+            </p>
+            <p class="ho">
+                <label>Họ *</label>
+                <span>
+                    <input type="text" value="@ViewBag.FirstName" autocomplete="given-name" id="ship-name-second" required>
+                </span>
+            </p>
+            <p class="tencongty">
+                <label>Tên công ty (Tùy chọn)</label>
+                <span>
+                    <input type="text" value="" autocomplete="given-name">
+                </span>
+            </p>
+            <p class="diachi">
+                <label>Địa chỉ *</label>
+                <span>
+                    <input type="text" value="" autocomplete="given-name" id="address" required>
+                </span>
+            </p>
+            <p class="sodienthoai">
+                <label>Số điện thoại *</label>
+                <span>
+                    <input type="text" value="@ViewBag.Mobile" autocomplete="given-name" id="mobile" required>
+                </span>
+            </p>
+
+            <p class="email">
+                <label>Email *</label>
+                <span>
+                    <input type="text" value="@ViewBag.Email" autocomplete="given-name" id="email" required>
+                </span>
+            </p>
+            <p class="mabuudien">
+                <label>Mã bưu điện (Tùy chọn)</label>
+                <span>
+                    <input type="text" value="" autocomplete="given-name">
+                </span>
+            </p>
+            <p class="note">
+                <label>Ghi chú đơn hàng (Tùy chọn)</label>
+                <span>
+                    <textarea name="note" placeholder="Ghi chú về đơn hàng, ví dụ: thời gian hay địa chỉ giao hàng chi tiết hơn"
+                              rows="2" cols="5"></textarea>
+                </span>
+            </p>
+        </div>
+    </div>
+    <div id="cart-container-right">
+        <h2>Đơn hàng của bạn</h2>
+        <div id="right-details">
+            <div id="top-detail">
+                <h3 id="sp">Sản Phẩm</h3>
+                <h3 id="tt">Tạm tính</h3>
+            </div>
+             @foreach (var item in Model)
+             {
+                 sumOfMoney += (decimal)item.Amount * item.Price;
+                <div class="second-row">   
+                    <div class="tensanpham">@item.Name&nbsp;<strong>x&nbsp;@item.Amount</strong></div>
+                    <div class="tensanpham-gia">
+                        <strong id="price">
+                            <strong class="price-icon">@(item.Amount * item.Price)₫</strong>
+                        </strong>
+                    </div>
+                </div>
+             }
+            <div id="third-row">
+                <div id="tamtinh">Tạm tính</div>
+                <div id="tamtinh-gia">
+                    <strong id="price">
+                        <strong id="price-icon">@sumOfMoney₫</strong>
+                    </strong>
+                </div>
+            </div>
+            <div id="fourth-row">
+                <div id="giaohang">Giao hàng</div>
+                <div id="giaohang-gia">
+                    Flat rate:
+                    <strong id="price">
+                        <strong id="price-icon">50000₫</strong>
+                    </strong>
+                </div>
+            </div>
+            <div id="fifth-row">
+                <div id="tong">Tổng</div>
+                <div id="tong-gia">
+                    <strong id="price">
+                        <strong id="price-icon">@(sumOfMoney + 50000)₫</strong>
+                    </strong>
+                </div>
+            </div>
+            <div id="sixth-row">
+                <form>
+                    <div id="bank-transfer">
+                        <input name="payment" type="radio" value="bank-transfer">Chuyển khoản ngân hàng <br />
+                        <p>Thực hiện thanh toán vào ngay tài khoản ngân hàng của chúng tôi. Vui lòng sử dụng Mã đơn hàng của bạn trong phần Nội dung thanh toán. Đơn hàng sẽ đươc giao sau khi tiền đã chuyển.</p>
+                    </div>
+                    <div id="on-delivery">
+                        <input name="payment" type="radio" value="on-delivery" checked>Thanh toán tiền mặt khi nhận hàng <br />
+                        <p>Trả tiền mặt khi giao hàng.</p>
+                    </div>
+                </form>
+            </div>
+            <div id="button">
+                <button type="submit" id="dathang" value="Đặt hàng" data-value="Đặt hàng">Đặt hàng</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section jsFooter{
+    <script src="/Assets/client/js/controller/paymentController.js"></script>
+    }

@@ -1,0 +1,21 @@
+﻿@{ var session = (UserLogin)Session[OnlineShopCNPM.Common.CommonConstants.USER_SESSION];}
+<div id="user-box">
+    <div class="name">Welcome, @session.Name</div>
+    <a class="link" id="infor" href="/">Thông tin cá nhân</a>
+    <a class="link" id="diary" href="/orders-diary/@session.UserID">Nhật ký mua hàng
+       @if(ViewBag.Amount != 0)
+       {
+           <div id="amount-miss-inforBox">@ViewBag.Amount</div>
+       }
+    </a>
+    <a class="link" id="fast-cart" href="/shopping-speed">Mua hàng nhanh</a>
+    <a class="link" id="change-pass" href="/">Đổi mật khẩu</a>
+    <a class="link" id="logout" href="/User/Logout">Đăng xuất</a>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#icon-user").off("click").on("click", function () {
+            $("#user-box").slideToggle(300);
+        })
+    });
+</script>

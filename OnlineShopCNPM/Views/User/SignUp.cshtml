@@ -1,0 +1,112 @@
+﻿@model OnlineShopCNPM.Models.SignUpModel
+@using BotDetect.Web.Mvc;
+<link href="@BotDetect.Web.CaptchaUrls.Absolute.LayoutStyleSheetUrl" rel="stylesheet" type="text/css" />
+
+@{
+    MvcCaptcha registerCapcha = new MvcCaptcha("registerCapcha");
+    registerCapcha.UserInputID = "CaptchaCode";
+}
+@{
+    ViewBag.Title = "Đăng kí";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section jsFooter{
+    <script src="/Assets/client/js/controller/userController.js"></script>
+}
+<div class="title-singin">ĐĂNG KÍ</div>
+<div class="login-main">
+    @using (Html.BeginForm("SignUp", "User", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <div class="form-group">
+                @if (ViewBag.Status != null)
+                {
+                    if (ViewBag.Status == "duplicate")
+                    {
+                        <div class="alert alert-danger" style="padding-left: 100px;">Tên đăng nhập đã tồn tại</div>
+                    }
+                    else if (ViewBag.Status == "fail")
+                    {
+                        <div class="alert alert-danger" style="padding-left: 100px;">Tạo tài khoản thất bại</div>
+                    }
+                    else if(ViewBag.Status == "success")
+                    {
+                        <div class="alert alert-success" style="padding-left: 100px;">Tạo tài khoản thành công</div>
+                    }
+                }
+            </div>
+            <div class="login-group">
+                @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "inf-loginmodel" })
+                @Html.TextBoxFor(model => model.UserName, new { @class = "input-login-main" })
+                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="login-group">
+                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "inf-loginmodel" })
+                @Html.PasswordFor(model => model.Password,new { @class = "input-login-main" })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="login-group">
+                @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "inf-loginmodel" })
+                @Html.PasswordFor(model => model.ConfirmPassword,new { @class = "input-login-main"})
+                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="login-group">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "inf-loginmodel" })
+                @Html.TextBoxFor(model => model.Name, new { @class = "input-login-main" })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="login-group">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "inf-loginmodel" })
+                @Html.TextBoxFor(model => model.Email, new { @class = "input-login-main" })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="login-group">
+                @Html.LabelFor(model => model.Mobile, htmlAttributes: new { @class = "inf-loginmodel" })
+                @Html.TextBoxFor(model => model.Mobile,new { @class = "input-login-main" })
+                @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="login-group">
+                @Html.LabelFor(model => model.ProvinceID, htmlAttributes: new { @class = "inf-loginmodel" })
+                @Html.DropDownList("ProvinceID", new SelectList(new string[] { }), new { @class = "input-login-main", @id = "ddlProvince" })
+                @Html.ValidationMessageFor(model => model.ProvinceID, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="login-group">
+                @Html.LabelFor(model => model.DistrictID, htmlAttributes: new { @class = "inf-loginmodel" })
+                @Html.DropDownList("DistrictID", new SelectList(new string[] { }), new { @class = "input-login-main", @id = "ddlDistrict" })
+                @Html.ValidationMessageFor(model => model.DistrictID, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="login-group">
+                @Html.LabelFor(model => model.SubDistrictID, htmlAttributes: new { @class = "inf-loginmodel" })
+                @Html.DropDownList("SubDistrictID", new SelectList(new string[] { }), new { @class = "input-login-main", @id = "ddlSubDistrict" })
+                @Html.ValidationMessageFor(model => model.DistrictID, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="login-group">
+                @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "inf-loginmodel" })
+                @Html.TextAreaFor(model => model.Address, new { @class = "input-login-main" })
+                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="login-group">
+                    @Html.Captcha(registerCapcha)
+                    @Html.TextBox("CaptchaCode")
+                    @Html.ValidationMessage("CaptchaCode", new { @class = "text-danger" })
+            </div>
+
+            <div class="login-group">
+                    <input type="submit" value="Đăng Kí" class="btn btn-default" />
+            </div>
+         </div>
+    }
+</div>
+

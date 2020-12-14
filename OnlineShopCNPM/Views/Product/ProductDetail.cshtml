@@ -1,0 +1,159 @@
+﻿@model Model.EF.Product
+@{
+    ViewBag.Title = "ProductDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section cssInsert{
+    <link href="/Assets/client/css/productDetail.css" rel="stylesheet" />
+    <link href="/Assets/client/css/scrollBarCategory.css" rel="stylesheet" />
+}
+@{
+    var pre_item = ViewBag.PreItem;
+    var next_item = ViewBag.NextItem;
+    var order = ViewBag.Order;
+    var cateChild = ViewBag.CategoryChild;
+    var cate = ViewBag.Category;
+    var listReview = (List<Model.EF.Review>)ViewBag.ListReview;
+    var amountOfReviews = listReview.Count;
+}
+<div id="slide">
+    <div class="left">
+        <div class="left-title"><a href="/" class="slide-linked">TRANG CHỦ</a></div>
+        <div class="left-title"><span class="divider">/</span></div>
+        <div class="left-title"><a href="/san-pham/@cate.ID/@cate.MetaTitle/1" class="slide-linked">@cate.Name.ToUpper()</a></div>
+        @if (ViewBag.CategoryChild != null)
+        {
+            <div class="left-title"><span class="divider">/</span></div>
+            <div class="left-title"><a href="/san-pham/@cateChild.ID/@cateChild.MetaTitle/2" class="slide-linked"> @cateChild.Name.ToUpper()</a></div>
+        }
+    </div>
+    <div class="right">
+        <div class="slide-button">
+            <a href="/chi-tiet/@pre_item.ID/@pre_item.MetaTitle/@order?inCategory=true" rel="next" class="button-next"><i class="fas fa-angle-left"></i></a>
+        </div>
+        <div class="slide-button">
+            <a href="/chi-tiet/@next_item.ID/@next_item.MetaTitle/@order?inCategory=true" rel="next" class="button-next"><i class="fas fa-angle-right"></i></a>
+        </div>
+    </div>
+</div>
+@if (Session[OnlineShopCNPM.Common.CommonConstants.ADD_ITEM] != null)
+{
+    <div id="alert-add">
+        <span>"@Session[OnlineShopCNPM.Common.CommonConstants.ADD_ITEM]" đã được thêm vào giỏ hàng.</span>
+    </div>
+    Session[OnlineShopCNPM.Common.CommonConstants.ADD_ITEM] = null;
+}
+<div id="content">
+    <div class="first-content">
+        <div class="title-first-content">DANH MỤC SẢN PHẨM</div>
+        <div id="small-item-1"></div>
+        <ul class="product-category">
+            @{ Html.RenderAction("ListProductCategory", "ProductCategory"); }
+        </ul>
+    </div>
+    <div class="second-content">
+        <div class="second-content-1">
+            <div class="second-content-1-1">
+                <div class="second-content-1-1-item">
+                    <div class="icon-up" style="display: none;"><i class="fas fa-heart"></i></div>
+                    <img src="@Model.ImageFirst" class="img-product" />
+                    <div class="icon-down"><i class="fas fa-expand-alt"></i></div>
+                </div>
+            </div>
+            <div class="second-content-1-2">
+                <p class="product-name" product-code="@Model.ProductCode">@Model.Name</p>
+                <div class="small-item-2"></div>
+                <div class="prices">
+                    @if (Model.Promotion.Value)
+                    {
+                        <span id="unit-1">₫</span>
+                        <div class="old-price">@Model.Price</div>
+                        <span id="unit-2">₫</span>
+                        <div class="new-price">@(Model.Price - Model.Price*(decimal)Model.PercentSale.Value/100)</div>
+                    }
+                    else
+                    {
+                        <span id="unit-2">₫</span>
+                        <div class="new-price">@Model.Price</div>
+                    }
+
+                </div>
+                <div class="product-description">
+                    @Html.Raw(Model.Description)
+                </div>
+                <div class="buying-bar">
+                    <div class="quantity-bar">
+                        <input class="minus control-button" type="button" value="-">
+                        <input aria-label="quantity" class="input-quantity" max="99" min="1" type="number" value="1">
+                        <input class="plus control-button" type="button" value="+">
+                    </div>
+                    <input class="buying-button" type="submit" value="Mua hàng">
+                </div>
+                <div class="contact-item">
+                    <a href="#" class="children-contact-item">LIÊN HỆ</a>
+                    <a href="#" class="children-contact-item">ZALO</a>
+                    <a href="#" class="children-contact-item">FACEBOOK</a>
+                </div>
+                <span class="small-category">Danh mục: <a href="#" class="children-small-category">Nhóm Tim mạch - Thần kinh - Bổ não</a>, <a href="#" class="children-small-category">Thuốc</a></span>
+                <div class="social-icon">
+                    <a href="#" id="social-icon-1"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" id="social-icon-2"><i class="fab fa-twitter"></i></a>
+                    <a href="#" id="social-icon-3"><i class="far fa-envelope"></i></a>
+                    <a href="#" id="social-icon-4"><i class="fab fa-pinterest"></i></a>
+                    <a href="#" id="social-icon-5"><i class="fab fa-google-plus-g"></i></a>
+                    <a href="#" id="social-icon-6"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" id="social-icon-7"><i class="fab fa-tumblr"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="second-content-2">
+            <div id="product-tabs">
+                <div id="description-tab">MÔ TẢ</div>
+                <div id="feedback-tab" amount-review ="@amountOfReviews">ĐÁNH GIÁ
+                @if(amountOfReviews != 0)
+                {
+                    <span>(@amountOfReviews)</span>
+                }
+                </div>
+            </div>
+            <div class="description-meta">
+                @Html.Raw(Model.MetaDescription)
+            </div>
+            <div class="feedback-page" style="display: none;">
+                <div class="contains-review">
+                    @foreach (var item in listReview)
+                    {
+                        <div class="each-review">
+                            <img src="/Assets/client/img/common/User_Circle.png" />
+                            <div class="user-name"> @item.NameUser <span class="create-date"> @item.CreatedDate </span></div>
+                            <div class="review-point"><span>@item.ReviewPoint/5</span><i class="fas fa-star" style="color: yellow;"></i></div>
+                            <div class="text-review">@item.Text</div>
+                        </div>
+                    }
+                </div>
+                <div class="feedback-framework">
+                    <h2><b>Đánh giá của bạn</b></h2>
+                    <div id="star-icons">
+                        <div class="stars" id="star-first"><i class="fas fa-star"></i></div>
+                        <div class="stars" id="star-second"><i class="fas fa-star"></i></div>
+                        <div class="stars" id="star-third"><i class="fas fa-star"></i></div>
+                        <div class="stars" id="star-fourth"><i class="fas fa-star"></i></div>
+                        <div class="stars" id="star-fifth"><i class="fas fa-star"></i></div>
+                    </div>
+                    <h3 style="float: left; width: 100%;">Nhận xét *</h3>
+                    <textarea id="feedback-textarea"></textarea>
+                    <div id="submit-button">Gửi đi</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#slide").css("background-image", "url('@Model.ImageFirst')");
+                    })
+</script>
+@section jsFooter{
+    <script src="/Assets/client/js/animation/ScrollProductCategory.js"></script>
+    <script src="/Assets/client/js/controller/ItemController.js"></script>
+}

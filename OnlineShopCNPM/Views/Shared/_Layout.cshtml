@@ -1,0 +1,193 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/Assets/client/css/Library/jquery-ui.css" rel="stylesheet" />
+    <link href="/Assets/client/css/index.css" rel="stylesheet" />
+    @RenderSection("cssInsert", required: false)
+    <link href="/Assets/client/css/login1.css" rel="stylesheet" />
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <link href="/Content/bootstrap.css" rel="stylesheet" />
+    <link href="/Content/bootstrap-theme.css" rel="stylesheet" />
+    <script src="/Assets/client/js/jquery-3.4.1.min.js"></script>
+    <script src="/Assets/client/js/jquery-ui.min.js"></script>
+    <link href="/Content/bootstrap.css" rel="stylesheet" />
+    <title>Trang chủ</title>
+</head>
+@{ var listModel = (List<OnlineShopCNPM.Models.CartItemModel>)Session[OnlineShopCNPM.Common.CommonConstants.CartSession];
+   var user = (UserLogin)Session[OnlineShopCNPM.Common.CommonConstants.USER_SESSION];
+    }
+<body>
+    <div id="header">
+        <div id="space-top"></div>
+        <div id="header-details">
+            <div id="header-up">
+                <div id="menu-icon">
+                    <span id="text-menu-icon">MENU</span>
+                </div>
+                <div  id="text-title">
+                    <img src="/Assets/client/img/common/icon-web.png"/>
+                </div>  
+                <div id="search-area">
+                    @{ Html.RenderAction("SearchTop", "Home");}
+                </div>
+                <div id="icon-help">
+                    <div id="icon-contain">
+                        <div id="icon-heart">
+                            <i class='fas fa-heart' style="font-size: 15pt;"></i>
+                        </div>
+                        <div id="icon-user">
+                            @if (user != null)
+                            {
+                                Html.RenderAction("CheckMiss", "User");
+                            }
+                            else
+                            {
+                                <i class='fas fa-user-circle' style="font-size: 22pt;"></i>
+                            }
+                        </div>
+                        <div id="icon-cart">
+                            @if (listModel != null && listModel.Count != 0)
+                            {
+                                Html.RenderAction("CartIndexSub", "Cart");
+                            }
+                            <i class='fas fa-cart-plus' style="font-size: 15pt;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="header-down">
+                <a href="/" id="main">Trang Chủ</a>
+                <a id="some1" href="/san-pham/xnts/xet-nghiem-tam-soat/1">Xét nghiệm - Tầm soát</a>
+                <div id="some2">Điền Sau</div>
+                <div id="some3">Điền Sau</div>
+                <div id="some4">Điền Sau</div>
+                <div id="contact">
+                    <li>
+                        <a id="test_a" target="_blank" href="#">
+                            <i class="fas fa-map-marker-alt" style="font-size:12px;"></i>
+                            <p id="test_p"> 1 Xuân Thủy, Dịch Vọng, Quận Cầu Giấy, Hà Nội</p>
+                            <span> Địa chỉ </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="#">
+                            <i class="far fa-envelope" style="font-size:12px;"></i>
+                            <span> Email </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="#">
+                            <i class="fas fa-phone" style="font-size:12px;"></i>
+                            <span> Số điện thoại </span>
+                        </a>
+                    </li>
+                </div>
+            </div>
+            @if (Session[OnlineShopCNPM.Common.CommonConstants.USER_SESSION] == null)
+            {
+                { Html.RenderAction("CheckLogin", "Home"); }
+            }
+            else
+            {
+                { Html.RenderAction("InforBox", "Home"); }
+            }
+        </div>
+        <div id="responsive-menu">
+            <img src="/Assets/client/img/common/icon-cancel.png" id="res-cancel">
+            <div id="search-area-res">
+                @{ Html.RenderAction("SearchResponsive", "Home");}
+            </div>
+            <br>
+            <a class="infor-res">TRANG CHỦ</a>
+            <a class="infor-res">THUỐC</a>
+            <a class="infor-res">DƯỢC MỸ PHẨM</a>
+            <a class="infor-res">DỤNG CỤ - VẬT TƯ Y TẾ</a>
+            <a class="infor-res">XÉT NGHIỆM - TẦM SOÁT</a>
+            <a class="infor-res" style=" border-bottom: 1px solid rgba(128, 128, 128, 0.2)">SOMETHING</a>
+        </div>
+    </div>
+    <div id="main">
+        @RenderBody()
+        <div id="contains-productTop-view">
+            <div id="view-product-new" class="view-product-top">
+                <div class="view-title">MỚI CẬP NHẬT</div>
+                <div class="hr-view"></div>
+                <div class="contains-product">
+                    @{ Html.RenderAction("TopNewProduct", "Product");}
+                </div>
+            </div>
+            <div id="view-product-buy" class="view-product-top">
+                <div class="view-title">BÁN CHẠY NHẤT</div>
+                <div class="hr-view"></div>
+                <div class="contains-product">
+                    @{ Html.RenderAction("TopBuyProductLess", "Product");}
+                </div>
+            </div>
+            <div id="view-product-view" class="view-product-top">
+                <div class="view-title">NỔI BẬT</div>
+                <div class="hr-view"></div>
+                <div class="contains-product">
+                    @{ Html.RenderAction("TopViewProductLess", "Product");}
+                </div>
+            </div>
+            <div id="view-product-review" class="view-product-top" style="margin-right: 0px !important;">
+                <div class="view-title">ĐÁNH GIÁ CAO NHẤT</div>
+                <div class="hr-view"></div>
+                <div class="contains-product">
+                    @{ Html.RenderAction("TopReviewProduct", "Product");}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="footer">
+        <div class="footer_block" id="footer_block1">
+            <span>Giới thiệu</span>
+            <div class="gach_ngang_dam"></div>
+            <div>
+                <p>
+                    <br>Website choytexanh.com!
+                    <br>Chợ Y tế cung cấp các sản phẩm Y tế : Thuốc, thực phẩm chức năng, Thiết bị và vật tư y tế đa dạng và chất lượng.
+                    <br>Theo dõi chúng tôi
+                </p>
+                <div>
+                    <a href="#" target="_blank" data-label="Facebook">
+                        <img src="/Assets/client/img/common/facebook.png" />
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer_block" id="footer_block2">
+            <span>Đăng ký nhận bản tin</span>
+            <div class="gach_ngang_dam"></div>
+
+            Đăng ký nhận bản cập nhật giá thuốc và thiết bị - vật tư y tế
+            <form action="#" method="post">
+                <input type="email" placeholder="  Nhập email">
+                <input id="submit_email" type="submit" value="Đăng ký">
+
+            </form>
+        </div>
+        <div class="footer_block" id="footer_block3">
+            <span>Từ khóa</span>
+            <div class="gach_ngang_dam"></div>
+            <div>
+                <a href="#" aria-label="điền sau">điền sau</a>
+                <a href="#" aria-label="điền sau">điền sau</a>
+                <a href="#" aria-label="điền sau">điền sau</a>
+                <a href="#" aria-label="điền sau">điền sau</a>
+                <a href="#" aria-label="điền sau">điền sau</a>
+                <a href="#" aria-label="điền sau">điền sau</a>
+                <a href="#" aria-label="điền sau">điền sau</a>
+                <a href="#" aria-label="điền sau">điền sau</a>
+                <a href="#" aria-label="điền sau">điền sau</a>
+                <a href="#" aria-label="điền sau">điền sau</a>
+            </div>
+        </div>
+    </div>
+    <script src="/Assets/client/js/index.js"></script>
+    <script src="/Assets/client/js/controller/BaseController.js"></script>
+    @RenderSection("jsFooter", required: false)
+</body>
+</html>

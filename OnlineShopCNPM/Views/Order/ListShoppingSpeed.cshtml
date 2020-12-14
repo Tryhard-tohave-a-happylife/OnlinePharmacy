@@ -1,0 +1,43 @@
+﻿@model List<Model.EF.Order>
+@{
+    ViewBag.Title = "ListShoppingSpeed";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section cssInsert{
+    <link href="/Assets/client/css/listShoppingSpeed.css" rel="stylesheet" />
+}
+<div id="cover-model">
+    <div id="model-shopping-speed" order-id ="">
+        <img id="cancel-model-shop" src="/Assets/client/img/common/icon-cancel.png" />
+        <div id="title-model">MUA HÀNG NHANH</div>
+        <div id="contains-products">
+        </div>
+        <div id="sum-all-price">Thành tiền : ₫<span></span></div>
+        <div id="note"> NOTE<span style="color: red;">*</span> : Đơn hàng nhanh sẽ lấy toàn bộ thông tin từ đơn hàng cũ
+        (tên tuổi, gmail, số điện thoại, địa chỉ, phương thức thanh toán...)</div>
+        <div id="payment">Thanh toán</div>
+    </div>
+</div>
+
+<div id="title-shopping-center">MUA HÀNG NHANH</div>
+@foreach(var item in Model)
+{
+    <div class="each-order">
+        <div class="contains-order-infor">
+            <div class="order-id" full-id="@item.ID"><span style="font-weight: bold; font-size: 11pt;">Mã đơn hàng : </span>@item.ID.ToString().Substring(0, 8)</div>
+            <div class="order-date"><span style="font-weight: bold; font-size: 11pt;">Thời gian đặt hàng : </span>@item.OrderDate</div>
+            <div class="shipped-date"><span style="font-weight: bold; font-size: 11pt;">Thời gian nhận hàng : </span>@item.ShippedDate</div>
+            <div class="email-mobile-order"><span style="font-weight: bold; font-size: 11pt;">Email - SDT : </span>@item.Email - @item.Mobile</div>
+            <div class="address-order"><span style="font-weight: bold; font-size: 11pt;">Địa chỉ: </span>@item.Address</div>
+            <div class="cost-by" style="font-style: italic">Thanh toán bằng tiền mặt</div>
+        </div>
+        <div class="button-shopping-speed">
+            <i class="fas fa-shopping-cart"></i>
+            <div>Shopping Speed</div>
+        </div>
+    </div>
+}
+@section jsFooter{
+    <script src="/Assets/client/js/controller/shoppingSpeedController.js"></script>
+}
+

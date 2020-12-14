@@ -1,0 +1,28 @@
+﻿@model List<Model.EF.Review>
+@{
+    var listImage = (List<String>)ViewBag.ListImage;
+    var amountSlide = Model.Count;
+}
+<div id="overflow-review" time-slide ="0" total-review ="@amountSlide" style="width: calc(100% * @amountSlide);">
+    @for(int i = 0; i < Model.Count; i++)
+    {
+        <div class="slide-each-review" style="background-image : url('@listImage[i]'); width: calc(100% / @amountSlide);">
+            <div class="contains-content">
+                <div class="contains-content-details">
+                    <img src="/Assets/client/img/common/icon-user-image.jpg" />
+                    <div class="contains-infor">
+                        <div class="review-point-each">
+                            @for (int j = 0; j < Model[i].ReviewPoint; j++)
+                            {
+                                <span><i class="fas fa-star" style="color: yellow;"></i></span>
+                            }
+                        </div>
+                        <div class="text-review-each">@Model[i].Text</div>
+                        <br />
+                        <div class="user-name-review">@Model[i].NameUser / <span style="font-weight: normal;">Khách Hàng</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

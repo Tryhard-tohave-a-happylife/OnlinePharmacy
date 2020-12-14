@@ -1,0 +1,19 @@
+﻿@model List<OnlineShopCNPM.Models.CartItemModel>
+<div id="amount-display">@ViewBag.SumAmount</div>
+    <div id="display-product">
+        <div id="product-scroll"> 
+        @foreach(var item in Model)
+        {
+            var link = "/chi-tiet/" + item.ProductCode + "/" + item.MetaTitle + "/1";
+            <div class="item" product-code ="@item.ProductCode">
+                <a href="@link"><img src="@item.Image" class="img-item" /></a>
+                <a class="item-name" href="@link">@item.Name</a>
+                <div class="cancel"></div>
+                <div class="item-amount-priceEach">@item.Amount x <span>₫@item.Price</span></div>
+            </div>
+        }
+        </div>
+        <div class="sum-price">Tạm tính: <span>₫@ViewBag.SumOfPrice</span></div>
+        <a class="button-redirect" href="/gio-hang">XEM GIỎ HÀNG</a>
+        <a class="button-redirect" href="/thanh-toan">THANH TOÁN</a>
+    </div>

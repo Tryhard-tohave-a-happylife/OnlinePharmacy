@@ -1,0 +1,165 @@
+﻿@model List<OnlineShopCNPM.Models.CartItemModel>
+@{
+    ViewBag.Title = "CartIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section cssInsert{
+    <link href="/Assets/client/css/cart.css" rel="stylesheet" />
+}
+@{ var listModel = (List<OnlineShopCNPM.Models.CartItemModel>)Session[OnlineShopCNPM.Common.CommonConstants.CartSession];}
+<div class="content-cart">
+    <div class="check-out-page-title">
+        <nav>
+            <a href="#">Shopping Cart</a>
+            <span><i class="fas fa-angle-right"></i></span>
+            <a href="#" id="checkout-details">Checkout details</a>
+        </nav>
+    </div>
+    <div id="div-restore">
+        <span id="item-name-restore">Chưa có sản phần nào</span>
+        <span style="color: forestgreen;"> đã xóa.</span>
+        <a href="/Cart/Restore" id="link-restore"><span>Khôi phục ?</span></a>
+    </div>
+    <div id="alert-empty">
+        <span>Chưa có sản phẩm nào trong giỏ hàng.</span>
+        <a href="/">Quay trở lại cửa hàng</a>
+    </div>
+    <div></div>
+    <div class="cart-content">
+        <div class="list-product">
+            <form class="cart-form" action="#" method="post">
+                <table class="table-product">
+                    <thead>
+                        <tr>
+                            <th colspan="3">Sản phẩm</th>
+                            <th>Giá</th>
+                            <th>Số lượng</th>
+                            <th>Tổng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                        <tr class="list-view-product" item-id ="@item.ProductCode" item-metaTitle="@item.MetaTitle"
+                            item-name ="@item.Name" item-img ="@item.Image" item-price ="@item.Price">
+                            <td class="product-remove">
+                                <i class="fas fa-window-close"></i>
+                            </td>
+                            <td class="product-img">
+                                <a href="/chi-tiet/@item.ProductCode/@item.MetaTitle/1">
+                                    <img src="@item.Image" />
+                                </a>
+                            </td>
+                            <td class="product-name">
+                                <a href="/chi-tiet/@item.ProductCode/@item.MetaTitle/1">
+                                   @item.Name
+                                </a>
+                            </td>
+                            <td class="product-price">
+                                <span>
+                                    <span class="currency-unit">đ</span>
+                                    <span class="display-price">@item.Price</span>
+                                </span>
+                            </td>
+                            <td class="product-quantity">
+                                <input class="button-up-up" type="button" value="-">
+                                <input class="quantity" type="number" value="@item.Amount">
+                                <input class="button-up-down" type="button" value="+">
+                            </td>
+                            <td class="product-subtotal">
+                                <span>
+                                    <span class="currency-unit">đ</span>
+                                    <span class="display-sumOfAll">@(item.Amount * item.Price)</span>
+                                </span>
+                            </td>
+                        </tr>
+                        }
+                        <tr>
+                            <td colspan="6" class="actions-clear">
+                                <div class="continue-shopping">
+                                    <a class="button-continue-shopping" href="/">
+                                        ← Tiếp tục xem sản phẩm
+                                    </a>
+                                </div>
+                                <button type="submit" class="button-update-cart" name="update_cart" value="Cập nhật giỏ hàng">
+                                    Cập nhật giỏ hàng
+                                </button>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+        <div class="cart-large">
+            <div class="cart-total">
+                <table class="table-total-title" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th colspan="2">
+                                Cộng giỏ hàng
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+                <table class="table-total" cellspacing="0">
+                    <tbody>
+                        <tr>
+                            <th colspan="2">Tạm tính</th>
+                            <td>
+                                <span>
+                                    <span class="currency-unit">đ</span>
+                                    @ViewBag.SumOfPrice
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">Phi ship</th>
+                            <td>
+                                <span>
+                                    <span class="currency-unit">đ</span>
+                                    50000
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">Tong cong</th>
+                            <td>
+                                <span>
+                                    <span class="currency-unit">đ</span>
+                                    @(ViewBag.SumOfPrice + 50000)
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="proceed-to-checkout">
+                    <a href="/thanh-toan" class="checkout-button">
+                        Tiến hành thanh toán
+                    </a>
+                </div>
+            </div>
+            <form class="checkout-coupon">
+            </form>
+        </div>
+        <form class="form-coupon">
+            <div class="coupon">
+                <h3 class="coupon-title">
+                    <i class="fas fa-tag"></i> Phiếu ưu đãi
+                </h3>
+                <input type="text" name="coupon_code" class="input-text" id="coupon_code" value="" placeholder="Mã ưu đãi">
+                <input type="submit" class="is-form-expand" name="apply_coupon" value="Áp dụng">
+            </div>
+        </form>
+    </div>
+</div>
+@section jsFooter{
+    <script src="/Assets/client/js/controller/CartController.js"></script>
+    @if(listModel == null || listModel.Count == 0)
+    {
+        <script>
+            $(document).ready(function () {
+                $(".cart-content").css("display", "none");
+                $("#alert-empty").css("display", "block");
+            });
+        </script>
+    }
+}

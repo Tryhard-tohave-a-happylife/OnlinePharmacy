@@ -1,0 +1,26 @@
+﻿.login-main {
+    width: 100%;
+    padding-left: calc(50% - 500px);
+    padding-right: calc(50% - 500px);
+}
+.input-login-main {
+    width: 1000px;
+    height: 38px;
+    margin-top: 10px;
+    padding-left: 8px;
+    font-size: 13pt;
+    outline: none;
+}
+
+    .input-login-main:focus {
+        box-shadow: 0px 0px 4px #dce3de;
+    }
+@media screen and (max-width: 1047px) {
+    .input-login-main {
+        width: 100%;
+    }
+    .login-main {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}

@@ -1,0 +1,88 @@
+﻿@model List<Model.EF.OrderDetail>
+@{
+    ViewBag.Title = "OrderDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section cssInsert{
+    <link href="/Assets/client/css/orderDetail.css" rel="stylesheet" />
+}
+<div id="slide">
+    <div id="slide-tittle">
+        <div class="slide-links"><a class="slide-link" href="">SHOPPING CART</a></div>
+        <span class="divider"><i class="fas fa-angle-right"></i></span>
+        <div class="slide-links"><a class="slide-link" href="">CHECKOUT DETAILS</a></div>
+        <span class="divider"><i class="fas fa-angle-right"></i></span>
+        <div class="slide-links"><a class="slide-link" href="">ORDER COMPLETE</a></div>
+    </div>
+</div>
+<div id="content">
+    <div id="content-1">
+        <div id="title-content-1-2">Chi tiết đơn hàng</div>
+        <div id="title-content-1-3">
+            <div class="content-detail">
+                <div class="content-detail-left bold">SẢN PHẨM</div>
+                <div class="content-detail-right bold">TỔNG</div>
+            </div>
+            @foreach (var item in Model)
+            {
+                <div class="content-detail">
+                    <div class="content-detail-left">@item.ProductName * @item.Amount</div>
+                    <div class="content-detail-right bold">₫@((item.Price * item.Amount).ToString("#,##0"))</div>
+                </div>
+            }
+            <div class="content-detail">
+                <div class="content-detail-left bold">Tổng số thu:</div>
+                <div class="content-detail-right bold">₫@ViewBag.SumOfCost.ToString("#,##0")</div>
+            </div>
+            <div class="content-detail">
+                <div class="content-detail-left bold">Giao nhận hàng:</div>
+                <div class="content-detail-right bold">₫50,000</div>
+            </div>
+            <div class="content-detail">
+                <div class="content-detail-left bold">Phương thức thanh toán:</div>
+                <div class="content-detail-right">@ViewBag.TypeOfCost</div>
+            </div>
+            <div class="content-detail">
+                <div class="content-detail-left bold">Tổng cộng:</div>
+                <div class="content-detail-right bold">₫@((ViewBag.SumOfCost + 50000).ToString("#,##0"))</div>
+            </div>
+        </div>
+    </div>
+    <div id="content-2">
+        <div id="content-2-1">Cảm ơn bạn. Đơn hàng của bạn đã được nhận.</div>
+        <br />
+        <ul>
+            <li class="content-2-2">
+                <div class="content-2-2-detail bold ">Mã đơn hàng:</div>
+                <div class="content-2-2-detail">@ViewBag.ID</div>
+            </li>
+            <li class="content-2-2">
+                <div class="content-2-2-detail bold ">Ngày đặt hàng:</div>
+                <div class="content-2-2-detail">@ViewBag.OrderDate</div>
+            </li>
+            @if (ViewBag.Status == "Complete")
+            {
+                <li class="content-2-2">
+                    <div class="content-2-2-detail bold">Trạng thái đơn hàng - Ngày giao hàng :</div>
+                    <div class="content-2-2-detail">@ViewBag.Status - @ViewBag.ShippedDate</div>
+                </li>
+            }
+            else
+            {
+                <li class="content-2-2">
+                    <div class="content-2-2-detail bold">Trạng thái đơn hàng :</div>
+                    <div class="content-2-2-detail">@ViewBag.Status</div>
+                </li>
+            }
+            <li class="content-2-2">
+                <div class="content-2-2-detail bold ">Tổng cộng:</div>
+                <div class="content-2-2-detail">₫@((ViewBag.SumOfCost + 50000).ToString("#,##0"))</div>
+            </li>
+            <li class="content-2-2">
+                <div class="content-2-2-detail bold ">Phương thức thanh toán:</div>
+                <div class="content-2-2-detail">@ViewBag.TypeOfCost</div>
+            </li>
+        </ul>
+    </div>
+</div>
+
